@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print QR Code</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        .header {
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .header h1 {
+            font-size: 24px;
+            color: #1a1a2e;
+            margin-bottom: 4px;
+        }
+        .header p {
+            font-size: 14px;
+            color: #666;
+        }
+        .qr-box {
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            border-radius: 16px;
+            padding: 20px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .qr-box img {
+            display: block;
+            width: 220px;
+            height: 220px;
+        }
+        .asset-box {
+            background: linear-gradient(135deg, #1a1a2e 0%, #2d2d44 100%);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .asset-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+        .asset-id {
+            font-size: 28px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+        .print-btn {
+            margin-top: 30px;
+            padding: 16px 48px;
+            font-size: 18px;
+            font-weight: 600;
+            background: linear-gradient(135deg, #e94560 0%, #c73e54 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.3);
+        }
+        .print-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(233, 69, 96, 0.4);
+        }
+        .print-btn:active {
+            transform: translateY(0);
+        }
+        .footer {
+            margin-top: 24px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+            .print-btn, .footer {
+                display: none !important;
+            }
+            .qr-box {
+                border: 3px solid #000;
+            }
+            .asset-box {
+                background: #000 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+
+        /* Error state */
+        .error {
+            color: #e94560;
+            padding: 40px;
+        }
+        .error h2 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="content">
+        <div class="header">
+            <h1>☕ Brewing Gadgets</h1>
+            <p>Scan QR Code for Service Request</p>
+        </div>
+        
+        <div class="qr-box">
+            <img id="qrImage" src="" alt="QR Code">
+        </div>
+        
+        <div class="asset-box">
+            <div class="asset-label">Asset ID</div>
+            <div class="asset-id" id="assetId">Loading...</div>
+        </div>
+        
+        <br>
+        <button class="print-btn" onclick="window.print()">🖨️ Print QR Code</button>
+        
+        <div class="footer">
+            Print this QR code and stick it on the machine
+        </div>
+    </div>
+
+    <script>
+        // Get asset from URL parameter
+        function getParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const asset = getParam('asset');
+        
+        if (!asset) {
+            document.getElementById('content').innerHTML = `
+                <div class="error">
+                    <h2>⚠️ No Asset ID</h2>
+                    <p>Please provide an asset ID in the URL</p>
+                    <p style="margin-top: 10px; font-size: 12px; color: #999;">
+                        Example: ?asset=TEST-001
+                    </p>
+                </div>
+            `;
+        } else {
+            // Set Asset ID
+            document.getElementById('assetId').textContent = asset;
+            
+            // Generate QR Code URL (pointing to your service form)
+            const formUrl = 'http://localhost:3000/customer-form?asset=' + encodeURIComponent(asset);
+            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(formUrl);
+            
+            // Set QR Image
+            document.getElementById('qrImage').src = qrUrl;
+            
+            // Update page title
+            document.title = 'Print QR - ' + asset;
+        }
+    </script>
+</body>
+</html>
