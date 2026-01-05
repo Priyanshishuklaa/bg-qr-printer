@@ -5,28 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Print QR Code - Service Request</title>
     <style>
-        :root {
-            --primary-900: #1a1a2e;
-            --primary-800: #2d2d44;
-            --neutral-50: #fafafa;
-            --neutral-100: #f5f5f5;
-            --neutral-200: #e5e5e5;
-            --neutral-300: #d4d4d4;
-            --neutral-400: #a3a3a3;
-            --neutral-500: #737373;
-            --neutral-600: #525252;
-            --space-xs: 4px;
-            --space-sm: 8px;
-            --space-md: 16px;
-            --space-lg: 24px;
-            --space-xl: 32px;
-            --radius-md: 8px;
-            --radius-lg: 12px;
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --font-display: 'Segoe UI', system-ui, sans-serif;
-            --font-mono: 'SF Mono', 'Consolas', monospace;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -34,23 +12,22 @@
         }
 
         body {
-            font-family: var(--font-display);
-            background: var(--neutral-100);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #f5f5f5;
             min-height: 100vh;
         }
 
         /* Top Header Bar */
         .top-header {
-            background: var(--primary-900);
-            color: var(--neutral-50);
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--primary-800);
+            background: #1a1a2e;
+            color: #fafafa;
+            padding: 12px 24px;
+            border-bottom: 1px solid #2d2d44;
         }
 
         .top-header-content {
-            max-width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--space-xl);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,53 +37,50 @@
         .top-header-left {
             display: flex;
             align-items: center;
-            gap: var(--space-lg);
+            gap: 24px;
         }
 
-        .top-header-left span:first-child {
+        .contact-label {
             font-weight: 600;
             letter-spacing: 0.05em;
         }
 
-        .top-header-left span:last-child,
-        .top-header-right {
-            color: var(--neutral-400);
+        .contact-phone {
+            color: #a3a3a3;
+        }
+
+        .welcome-text {
+            color: #a3a3a3;
         }
 
         /* Main Navigation */
         .main-nav {
-            background: var(--neutral-50);
-            border-bottom: 1px solid var(--neutral-300);
-            padding: var(--space-lg) 0;
+            background: white;
+            border-bottom: 1px solid #d4d4d4;
+            padding: 20px 24px;
         }
 
         .main-nav-content {
-            max-width: 100%;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--space-xl);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .logo {
-            font-family: var(--font-display);
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-900);
+            color: #1a1a2e;
             display: flex;
             align-items: center;
-            gap: var(--space-sm);
+            gap: 10px;
             letter-spacing: -0.02em;
-        }
-
-        .logo svg {
-            color: var(--primary-900);
         }
 
         /* Page Container */
         .page-container {
-            padding: var(--space-xl) var(--space-md);
+            padding: 32px 16px;
             padding-bottom: 60px;
         }
 
@@ -118,68 +92,61 @@
         /* Header Section */
         .header-section {
             text-align: center;
-            margin-bottom: var(--space-xl);
-            animation: fadeIn 0.5s ease;
+            margin-bottom: 32px;
         }
 
         .icon-box {
             width: 60px;
             height: 60px;
-            margin: 0 auto var(--space-md);
-            background: var(--primary-900);
-            border-radius: var(--radius-lg);
+            margin: 0 auto 16px;
+            background: #1a1a2e;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .icon-box svg {
-            stroke: var(--neutral-50);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
 
         .header-section h1 {
             font-size: 1.75rem;
-            color: var(--primary-900);
-            margin-bottom: var(--space-xs);
+            color: #1a1a2e;
+            margin-bottom: 4px;
             font-weight: 700;
         }
 
         .header-section p {
-            color: var(--neutral-600);
+            color: #525252;
             font-size: 1rem;
         }
 
         /* Card */
         .card {
             background: white;
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--neutral-200);
-            animation: slideUp 0.5s ease;
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e5e5;
         }
 
         .card h3 {
             text-align: center;
-            margin-bottom: var(--space-lg);
-            color: var(--primary-900);
+            margin-bottom: 24px;
+            color: #1a1a2e;
             font-size: 1.25rem;
         }
 
         /* QR Code Section */
         .qr-section {
             text-align: center;
-            padding: var(--space-lg) 0;
         }
 
         .qr-box {
             display: inline-block;
-            background: var(--neutral-100);
-            border: 2px solid var(--neutral-300);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            margin-bottom: var(--space-lg);
+            background: #f5f5f5;
+            border: 2px solid #d4d4d4;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
         }
 
         .qr-box img {
@@ -192,25 +159,25 @@
         .asset-badge {
             display: inline-flex;
             align-items: center;
-            gap: var(--space-sm);
-            padding: var(--space-sm) var(--space-md);
-            background: var(--neutral-200);
-            border: 1px solid var(--neutral-300);
-            border-radius: var(--radius-md);
-            margin-bottom: var(--space-lg);
+            gap: 8px;
+            padding: 10px 16px;
+            background: #e5e5e5;
+            border: 1px solid #d4d4d4;
+            border-radius: 8px;
+            margin-bottom: 24px;
         }
 
         .asset-badge-label {
             font-size: 0.75rem;
-            color: var(--neutral-500);
+            color: #737373;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
         .asset-badge-value {
-            font-family: var(--font-mono);
+            font-family: 'SF Mono', 'Consolas', 'Monaco', monospace;
             font-size: 1.1rem;
-            color: var(--primary-900);
+            color: #1a1a2e;
             font-weight: 600;
         }
 
@@ -219,13 +186,13 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-sm);
+            gap: 8px;
             width: 100%;
-            padding: var(--space-lg);
-            background: var(--primary-900);
+            padding: 16px 24px;
+            background: #1a1a2e;
             color: white;
             border: none;
-            border-radius: var(--radius-md);
+            border-radius: 8px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -233,12 +200,8 @@
         }
 
         .btn-primary:hover {
-            background: var(--primary-800);
+            background: #2d2d44;
             transform: translateY(-1px);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
         }
 
         .btn-primary svg {
@@ -248,22 +211,22 @@
 
         /* Info Text */
         .info-text {
-            margin-top: var(--space-lg);
+            margin-top: 20px;
             text-align: center;
             font-size: 0.875rem;
-            color: var(--neutral-500);
+            color: #737373;
         }
 
         /* Error State */
         .error-container {
             text-align: center;
-            padding: var(--space-xl);
+            padding: 32px;
         }
 
         .error-icon {
             width: 80px;
             height: 80px;
-            margin: 0 auto var(--space-lg);
+            margin: 0 auto 20px;
             background: rgba(239, 68, 68, 0.15);
             border-radius: 50%;
             display: flex;
@@ -271,34 +234,13 @@
             justify-content: center;
         }
 
-        .error-icon svg {
-            stroke: #ef4444;
-        }
-
         .error-container h2 {
-            color: var(--primary-900);
-            margin-bottom: var(--space-sm);
+            color: #1a1a2e;
+            margin-bottom: 8px;
         }
 
         .error-container p {
-            color: var(--neutral-600);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            color: #525252;
         }
 
         /* Print Styles */
@@ -315,22 +257,16 @@
             }
 
             .page-container {
-                padding: var(--space-md);
+                padding: 16px;
             }
 
             .card {
                 box-shadow: none;
-                border: 2px solid var(--primary-900);
+                border: 2px solid #1a1a2e;
             }
 
             .qr-box {
                 border: 3px solid #000;
-            }
-
-            .asset-badge {
-                background: #f0f0f0 !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
             }
         }
 
@@ -338,13 +274,13 @@
         @media (max-width: 600px) {
             .top-header-content {
                 flex-direction: column;
-                gap: var(--space-sm);
+                gap: 8px;
                 text-align: center;
             }
 
             .top-header-left {
                 flex-direction: column;
-                gap: var(--space-xs);
+                gap: 4px;
             }
         }
     </style>
@@ -354,10 +290,10 @@
     <header class="top-header">
         <div class="top-header-content">
             <div class="top-header-left">
-                <span>CONTACT US</span>
-                <span>📞 +9714 232 5554</span>
+                <span class="contact-label">CONTACT US</span>
+                <span class="contact-phone">📞 +9714 232 5554</span>
             </div>
-            <div class="top-header-right">
+            <div class="welcome-text">
                 Welcome to Service Request Portal
             </div>
         </div>
@@ -368,7 +304,7 @@
         <div class="main-nav-content">
             <div class="logo">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                    <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
                 </svg>
                 <span>SERVICE REQUEST</span>
             </div>
@@ -381,11 +317,11 @@
             <!-- Header -->
             <div class="header-section">
                 <div class="icon-box">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="3" width="7" height="7" />
-                        <rect x="14" y="3" width="7" height="7" />
-                        <rect x="14" y="14" width="7" height="7" />
-                        <rect x="3" y="14" width="7" height="7" />
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
                     </svg>
                 </div>
                 <h1>Print QR Code</h1>
@@ -397,23 +333,25 @@
                 <h3>QR Code for Service Request</h3>
                 
                 <div class="qr-section">
-                    <!-- Asset Badge -->
-                    <div class="asset-badge">
-                        <span class="asset-badge-label">Asset ID</span>
-                        <span class="asset-badge-value" id="assetId">Loading...</span>
-                    </div>
-
                     <!-- QR Code -->
                     <div class="qr-box">
                         <img id="qrImage" src="" alt="QR Code">
                     </div>
 
+                    <!-- Asset Badge -->
+                    <div>
+                        <div class="asset-badge">
+                            <span class="asset-badge-label">ASSET ID</span>
+                            <span class="asset-badge-value" id="assetId">Loading...</span>
+                        </div>
+                    </div>
+
                     <!-- Print Button -->
                     <button class="btn-primary" onclick="window.print()">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="6 9 6 2 18 2 18 9" />
-                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
-                            <rect x="6" y="14" width="12" height="8" />
+                            <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                            <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+                            <rect x="6" y="14" width="12" height="8"></rect>
                         </svg>
                         Print QR Code
                     </button>
@@ -427,45 +365,34 @@
     </div>
 
     <script>
-        // Get asset from URL parameter
         function getParam(name) {
-            const urlParams = new URLSearchParams(window.location.search);
+            var urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
-        // Support both 'asset' and 'assetId' parameters
-        const asset = getParam('asset') || getParam('assetId');
+        var asset = getParam('asset') || getParam('assetId');
         
         if (!asset) {
-            document.getElementById('content').innerHTML = `
-                <div class="error-container">
-                    <div class="error-icon">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <line x1="12" y1="8" x2="12" y2="12" />
-                            <line x1="12" y1="16" x2="12.01" y2="16" />
-                        </svg>
-                    </div>
-                    <h2>No Asset ID Provided</h2>
-                    <p style="margin-bottom: 16px;">Please provide an asset ID in the URL</p>
-                    <p style="font-size: 0.875rem; color: #737373;">
-                        Example: ?asset=TEST-001 or ?assetId=TEST-001
-                    </p>
-                </div>
-            `;
+            document.getElementById('content').innerHTML = 
+                '<div class="error-container">' +
+                    '<div class="error-icon">' +
+                        '<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                            '<circle cx="12" cy="12" r="10"></circle>' +
+                            '<line x1="12" y1="8" x2="12" y2="12"></line>' +
+                            '<line x1="12" y1="16" x2="12.01" y2="16"></line>' +
+                        '</svg>' +
+                    '</div>' +
+                    '<h2>No Asset ID Provided</h2>' +
+                    '<p style="margin-bottom: 16px;">Please provide an asset ID in the URL</p>' +
+                    '<p style="font-size: 0.875rem; color: #737373;">Example: ?asset=TEST-001</p>' +
+                '</div>';
         } else {
-            // Set Asset ID
             document.getElementById('assetId').textContent = asset;
             
-            // Generate QR Code URL (pointing to your service form)
-            // Update this URL when you deploy to production
-            const formUrl = 'http://localhost:3000/customer-form?asset=' + encodeURIComponent(asset);
-            const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(formUrl);
+            var formUrl = 'http://localhost:3000/customer-form?asset=' + encodeURIComponent(asset);
+            var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=' + encodeURIComponent(formUrl);
             
-            // Set QR Image
             document.getElementById('qrImage').src = qrUrl;
-            
-            // Update page title
             document.title = 'Print QR - ' + asset;
         }
     </script>
